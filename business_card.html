@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servio Business Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Add QR Code library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #008080;
+            --primary-dark: #006666;
+            --background: #f5f5f5;
+            --text: #333333;
+            --white: #FFFFFF;
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--background);
+            padding: 20px;
+        }
+
+        /* Business Card Container */
+        .card-container {
+            width: 3.5in;
+            height: 2in;
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: visible;
+            border-radius: 12px;
+            display: flex;
+        }
+
+        .card-content {
+            flex: 1;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--background) 100%);
+            position: relative;
+        }
+
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            margin-left: 15px;
+            margin-bottom: 12px;
+        }
+
+        .logo-main {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-section img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .logo-section span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .slogan {
+            font-size: 11px;
+            color: var(--text);
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 1px;
+        }
+
+        .name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1px;
+            margin-left: 15px;
+        }
+
+        .title {
+            font-size: 12px;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 8px;
+            margin-left: 15px;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            font-size: 11px;
+            color: var(--text);
+            margin-left: 15px;
+            margin-bottom: 8px;
+        }
+
+        .contact-info p {
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .icon {
+            color: var(--primary);
+            font-style: normal;
+        }
+
+        .qr-section {
+            width: 1.1in;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        #qrcode {
+            background: var(--white);
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        .qr-text {
+            color: var(--white);
+            font-size: 9px;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .insta-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .card-container {
+                box-shadow: none;
+            }
+
+            @page {
+                size: 3.5in 2in;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <div class="card-content">
+            <div class="accent-bar"></div>
+            <div class="logo-section">
+                <div class="logo-main">
+                    <img src="../assets/images/appIcon.png" alt="Servio Logo">
+                    <span>servio</span>
+                </div>
+                <p class="slogan">Find trusted local services instantly!</p>
+            </div>
+            <h1 class="name">Saksham Nanda</h1>
+            <p class="title">Founder & Developer</p>
+            <div class="contact-info">
+                <p><span class="icon">📱</span> 403-909-4092</p>
+                <p><span class="icon">📧</span> servio.connect@gmail.com</p>
+                <p><span class="icon">🌐</span> theservio.com</p>
+            </div>
+        </div>
+        <div class="qr-section">
+            <div id="qrcode"></div>
+            <div class="qr-text">
+                <svg class="insta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path fill="white"
+                        d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                </svg>
+                Follow us on Instagram
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate QR Code
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://instagram.com/servio_ca",  // Replace with your Instagram URL
+            width: 70,
+            height: 70,
+            colorDark: "#008080",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+
+</html>
