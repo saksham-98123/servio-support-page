@@ -695,39 +695,57 @@ footer {
 
 /* Contact Page Styles */
 .contact-section {
-    padding: 80px 0;
-    background: var(--background);
+    padding: 4rem 0;
+    background-color: #f8f9fa;
 }
 
 .contact-grid {
-    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.contact-info h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--text);
-}
-
-.contact-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.contact-method {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
+.contact-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
     text-align: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.method-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.contact-link {
+    display: block;
+    color: #0D8A6A;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.contact-description {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* About Page Styles */
@@ -847,30 +865,43 @@ footer {
     border-radius: var(--radius-lg);
     text-align: center;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.3s ease;
-}
-
-.method-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
 }
 
 .method-icon {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+.method-card h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
 }
 
 .contact-link {
+    display: block;
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
 }
 
 .method-description {
     color: var(--text);
     opacity: 0.8;
-    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+
+    .method-card {
+        padding: 2rem;
+    }
 }
 
 /* About Page Styles */
