@@ -27,13 +27,13 @@
   <url>
     <loc>https://theservio.com/pages/about.html</loc>
     <lastmod>2024-03-14</lastmod>
-    <changefreq>monthly</priority>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://theservio.com/pages/contact.html</loc>
     <lastmod>2024-03-14</lastmod>
-    <changefreq>monthly</priority>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 </urlset> 
