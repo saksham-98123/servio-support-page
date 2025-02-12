@@ -1,75 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #555;
-        }
-        .contact {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
-        .privacy-policy {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
-    </style>
+    <title>Servio | Commission-Free Local Service Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Modern sans-serif font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <h1>Support Page</h1>
-    <p>If you have any questions or need assistance, please feel free to reach out to us.</p>
-    
-    <div class="contact">
-        <h2>Contact Us</h2>
-        <p>Email: <a href="mailto:servio.connect@gmail.com">servio.connect@gmail.com</a></p>
-    </div>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <img src="assets/images/appIcon.png" alt="Servio Logo" class="nav-logo-img">
+                <span>servio</span>
+            </a>
+            <div class="nav-links">
+                <a href="pages/services.html">Users</a>
+                <a href="pages/providers.html">Providers</a>
+                <a href="pages/about.html">About</a>
+                <a href="pages/contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="privacy-policy">
-        <h2>Privacy Policy</h2>
-        <p>Effective date: 2024/11/18</p>
-        <p>Servio ("us", "we", or "our") operates the Servio mobile application (the "Service").</p>
-        
-        <h3>Information Collection and Use</h3>
-        <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
-        
-        <h3>Permissions</h3>
-        <p>The app requires access to the following permissions:</p>
-        <ul>
-            <li><strong>Camera</strong>: We use this permission to allow users to take photos or videos within the app.</li>
-        </ul>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>
+                    Local Services,
+                    <span class="gradient-text">Zero Commission</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Connect directly with trusted local service providers.
+                    No hidden fees, just honest service.
+                </p>
+                <div class="hero-actions">
+                    <a href="pages/services.html" class="btn-primary">Explore Services</a>
+                    <a href="pages/providers.html" class="btn-secondary">Join as Provider</a>
+                </div>
+                <div class="trust-metrics">
+                    <div class="metric">
+                        <span class="metric-value">0%</span>
+                        <span class="metric-label">Commission</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">100+</span>
+                        <span class="metric-label">Local Providers</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">24/7</span>
+                        <span class="metric-label">Support</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h3>Use of Data</h3>
-        <p>Servio uses the collected data for various purposes:</p>
-        <ul>
-            <li>To provide and maintain our Service</li>
-            <li>To notify you about changes to our Service</li>
-            <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
-        </ul>
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Why Servio</span>
+                    <h2>Better for Everyone</h2>
+                    <p>Experience the future of local service connections</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Zero Commission</h3>
+                        <p>No hidden fees or charges. Providers keep 100% of their earnings.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Community First</h3>
+                        <p>Building trust networks within Airdrie's local community.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Smart Discovery</h3>
+                        <p>Find verified local services with real-time availability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h3>Changes to This Privacy Policy</h3>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How Servio Works</h2>
+                    <p>Connect with local services in three easy steps</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon">🔍</div>
+                        <h3>Discover Services</h3>
+                        <p>Browse trusted local providers in Airdrie for the services you need</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">💬</div>
+                        <h3>Explore Customer Feedback</h3>
+                        <p>Peruse reviews from past clients to inform your choice</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">✅</div>
+                        <h3>Confirm Availability</h3>
+                        <p>Validate provider availability and book services</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h3>Contact Us</h3>
-        <p>If you have any questions about this Privacy Policy, please contact us:</p>
-        <ul>
-            <li>By email: <a href="mailto:servio.connect@gmail.com">servio.connect@gmail.com</a></li>
-        </ul>
-    </div>
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Contact?</h2>
+                <p>Join the commission-free revolution in local services</p>
+                <div class="cta-buttons">
+                    <a href="pages/services.html" class="btn-primary">Browse Services</a>
+                    <a href="pages/contact.html" class="btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <img src="assets/images/appIcon.png" alt="Servio Logo" class="footer-logo">
+                    <p class="footer-tagline">Connecting Communities, Empowering Services</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="pages/about.html">About</a>
+                        <a href="pages/contact.html">Contact</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <p>servio.connect@gmail.com</p>
+                        <p>403-909-4092</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Servio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
