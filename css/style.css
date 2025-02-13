@@ -1124,3 +1124,48 @@ footer {
         margin-bottom: 1.5rem;
     }
 }
+
+/* App Download Section */
+.app-download {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.download-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.store-button {
+    transition: transform 0.2s ease;
+}
+
+.store-button:hover {
+    transform: translateY(-2px);
+}
+
+.store-badge {
+    height: 40px;
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .store-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .store-badge {
+        height: 48px;
+    }
+}
