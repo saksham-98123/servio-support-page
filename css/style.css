@@ -34,12 +34,16 @@ body {
     line-height: 1.5;
     color: var(--text);
     background-color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    padding-left: 20px;
 }
 
 /* Navigation */
@@ -229,16 +233,21 @@ body {
 footer {
     background: var(--background);
     padding: 60px 0 20px;
+    margin-top: auto;
 }
 
 .footer-main {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+    gap: 4rem;
+    padding: 0;
 }
 
 .footer-brand {
-    max-width: 300px;
+    max-width: 320px;
+    margin: 0;
+    padding: 0;
 }
 
 .footer-logo {
@@ -250,6 +259,49 @@ footer {
 .footer-tagline {
     color: var(--text);
     opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0;
+    margin-left: 0;
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.store-button {
+    flex: 0 0 auto;
+    height: 48px;
+}
+
+.store-button img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.store-badge {
+    transition: transform 0.2s ease-in-out;
+}
+
+.store-badge:hover {
+    transform: scale(1.05);
+}
+
+.store-button {
+    display: inline-block;
+}
+
+.footer-brand>* {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .footer-links {
@@ -264,17 +316,18 @@ footer {
 .footer-column h4 {
     color: var(--text);
     margin-bottom: 1rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-.footer-column a,
-.footer-column p {
+.footer-column a {
     display: block;
     color: var(--text);
     text-decoration: none;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     opacity: 0.8;
     transition: opacity 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .footer-column a:hover {
@@ -286,8 +339,12 @@ footer {
     padding-top: 20px;
     border-top: 1px solid var(--shadow-light);
     text-align: center;
+}
+
+.footer-bottom p {
     color: var(--text);
-    opacity: 0.8;
+    opacity: 0.7;
+    font-size: 0.9rem;
 }
 
 /* Trust metrics styling */
@@ -407,17 +464,26 @@ footer {
 
     .footer-main {
         flex-direction: column;
-        gap: 2rem;
+        gap: 2.5rem;
+    }
+
+    .footer-brand {
+        text-align: left;
+    }
+
+    .store-buttons {
+        justify-content: flex-start;
+        margin: 1.5rem 0;
     }
 
     .footer-links {
         flex-direction: column;
         gap: 2rem;
+        text-align: center;
     }
 
-    .footer-brand {
-        text-align: center;
-        margin: 0 auto;
+    .footer-column {
+        min-width: 100%;
     }
 }
 
@@ -1123,4 +1189,57 @@ footer {
         padding: 1.5rem;
         margin-bottom: 1.5rem;
     }
+}
+
+/* App Download Section */
+.app-download {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.download-text {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.store-button {
+    flex: 0 0 auto;
+    height: 48px;
+}
+
+.store-button img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Footer download section */
+.footer-brand .store-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    align-items: center;
+}
+
+.footer-brand .store-button {
+    height: 48px;
+}
+
+.footer-brand .store-button img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
 }
