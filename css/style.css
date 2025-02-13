@@ -285,6 +285,18 @@ footer {
     object-fit: contain;
 }
 
+.store-badge {
+    transition: transform 0.2s ease-in-out;
+}
+
+.store-badge:hover {
+    transform: scale(1.05);
+}
+
+.store-button {
+    display: inline-block;
+}
+
 .footer-brand>* {
     margin-left: 0;
     margin-right: 0;
