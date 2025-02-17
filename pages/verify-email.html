@@ -120,23 +120,69 @@
                 transform: rotate(360deg);
             }
         }
+
+        .action-buttons {
+            margin-top: 20px;
+        }
+
+        .download-text {
+            margin-bottom: 10px;
+        }
+
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .store-button {
+            width: 120px;
+            height: 40px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .store-button:hover {
+            transform: scale(1.05);
+        }
+
+        .store-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body>
     <div class="verification-container">
         <img src="../assets/images/appIcon.png" alt="Servio Logo" class="logo">
-        <h1>Email Verification</h1>
-        <p>We're verifying your email address. This will only take a moment.</p>
+        <h1>Email Verified!</h1>
+        <p>Your email has been successfully verified. You can now sign in to start using Servio.</p>
 
         <div class="loading">
             <div class="spinner"></div>
-            <p>Verifying your email...</p>
+            <p>Completing verification...</p>
         </div>
 
         <div class="status success">
-            <p>✅ Email verified successfully!</p>
-            <a href="/" class="button">Continue to Servio</a>
+            <p>✅ Ready to get started!</p>
+            <div class="action-buttons">
+                <a href="/login" class="button primary">Sign In</a>
+                <p class="download-text">Download the app to get started:</p>
+                <div class="store-buttons">
+                    <a href="[Your App Store Link]" class="store-button">
+                        <img src="../assets/images/app-store.png" alt="Download on App Store">
+                    </a>
+                    <a href="[Your Play Store Link]" class="store-button">
+                        <img src="../assets/images/play-store.png" alt="Get it on Google Play">
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="status error">
