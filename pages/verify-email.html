@@ -192,54 +192,69 @@
     </div>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    <script>
-        // Initialize Firebase with your config
+        // Your web app's Firebase configuration
         const firebaseConfig = {
-            // Your Firebase config here
+            apiKey: "AIzaSyC6KUSkm3AY6NOoGnhqXgWusyc5muy5uZc",
+            authDomain: "bookit-test-8f64e.firebaseapp.com",
+            projectId: "bookit-test-8f64e",
+            storageBucket: "bookit-test-8f64e.firebasestorage.app",
+            messagingSenderId: "41626093889",
+            appId: "1:41626093889:web:50c127f522157a1836f9c0",
+            measurementId: "G-F3DKJD8DQT"
         };
-        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
         // Get verification code from URL
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const oobCode = urlParams.get('oobCode');
+        const actionCode = urlParams.get('oobCode');
 
         // Show loading state
         document.querySelector('.loading').style.display = 'block';
 
-        // Verify the email
-        firebase.auth().applyActionCode(oobCode)
-            .then(() => {
-                // Hide loading, show success
-                document.querySelector('.loading').style.display = 'none';
-                document.querySelector('.success').style.display = 'block';
-            })
-            .catch((error) => {
-                // Hide loading, show error
-                document.querySelector('.loading').style.display = 'none';
-                document.querySelector('.error').style.display = 'block';
-                console.error('Verification error:', error);
-            });
+        // Handle the verification code
+        if (actionCode) {
+            applyActionCode(auth, actionCode)
+                .then(() => {
+                    // Email verified successfully
+                    document.querySelector('.loading').style.display = 'none';
+                    document.querySelector('.success').style.display = 'block';
+                })
+                .catch((error) => {
+                    // Error occurred
+                    document.querySelector('.loading').style.display = 'none';
+                    document.querySelector('.error').style.display = 'block';
+                    console.error('Verification error:', error);
+                });
+        } else {
+            // No verification code provided
+            document.querySelector('.loading').style.display = 'none';
+            document.querySelector('.error').style.display = 'block';
+        }
 
         // Function to resend verification email
-        function resendVerification() {
-            const user = firebase.auth().currentUser;
-            if (user) {
-                user.sendEmailVerification()
-                    .then(() => {
-                        alert('Verification email sent! Please check your inbox.');
-                    })
-                    .catch((error) => {
-                        alert('Error sending verification email. Please try again.');
-                        console.error('Resend error:', error);
-                    });
-            } else {
-                alert('Please sign in to resend verification email.');
+        window.resendVerification = async () => {
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    await user.sendEmailVerification();
+                    alert('Verification email sent! Please check your inbox.');
+                } else {
+                    alert('Please sign in to resend verification email.');
+                }
+            } catch (error) {
+                alert('Error sending verification email. Please try again.');
+                console.error('Resend error:', error);
             }
-        }
+        };
     </script>
 </body>
 
