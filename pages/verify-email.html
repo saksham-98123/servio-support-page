@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email - Servio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #008080;
+            --primary-dark: #006666;
+            --background: #f5f5f5;
+            --text: #333333;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--background);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .verification-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: var(--text);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success {
+            background: #e7f5e7;
+            color: #0f5132;
+            display: none;
+        }
+
+        .error {
+            background: #fee7e7;
+            color: #842029;
+            display: none;
+        }
+
+        .button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="verification-container">
+        <img src="../assets/images/appIcon.png" alt="Servio Logo" class="logo">
+        <h1>Email Verification</h1>
+        <p>We're verifying your email address. This will only take a moment.</p>
+
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Verifying your email...</p>
+        </div>
+
+        <div class="status success">
+            <p>✅ Email verified successfully!</p>
+            <a href="/" class="button">Continue to Servio</a>
+        </div>
+
+        <div class="status error">
+            <p>❌ Verification failed. Please try again or request a new verification email.</p>
+            <button onclick="resendVerification()" class="button">Resend Verification</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+
+    <script>
+        // Initialize Firebase with your config
+        const firebaseConfig = {
+            // Your Firebase config here
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Get verification code from URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const oobCode = urlParams.get('oobCode');
+
+        // Show loading state
+        document.querySelector('.loading').style.display = 'block';
+
+        // Verify the email
+        firebase.auth().applyActionCode(oobCode)
+            .then(() => {
+                // Hide loading, show success
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelector('.success').style.display = 'block';
+            })
+            .catch((error) => {
+                // Hide loading, show error
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelector('.error').style.display = 'block';
+                console.error('Verification error:', error);
+            });
+
+        // Function to resend verification email
+        function resendVerification() {
+            const user = firebase.auth().currentUser;
+            if (user) {
+                user.sendEmailVerification()
+                    .then(() => {
+                        alert('Verification email sent! Please check your inbox.');
+                    })
+                    .catch((error) => {
+                        alert('Error sending verification email. Please try again.');
+                        console.error('Resend error:', error);
+                    });
+            } else {
+                alert('Please sign in to resend verification email.');
+            }
+        }
+    </script>
+</body>
+
+</html>
