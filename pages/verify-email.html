@@ -161,23 +161,37 @@
 <body>
     <div class="verification-container">
         <img src="../assets/images/appIcon.png" alt="Servio Logo" class="logo">
-        <h1>Email Verified!</h1>
-        <p>Your email has been successfully verified. You can now sign in to start using Servio.</p>
+
+        <!-- Email Verification Content -->
+        <div id="emailVerification">
+            <h1>Email Verified!</h1>
+            <p>Your email has been successfully verified. You can now sign in to start using Servio.</p>
+        </div>
+
+        <!-- Password Reset Content -->
+        <div id="passwordReset" style="display: none;">
+            <h1>Reset Password</h1>
+            <p>Enter your new password below:</p>
+            <input type="password" id="newPassword" placeholder="New Password"
+                style="padding: 10px; margin: 10px 0; width: 100%; border-radius: 6px; border: 1px solid #ddd;">
+            <button class="button" onclick="confirmPasswordReset()">Reset Password</button>
+        </div>
 
         <div class="loading">
             <div class="spinner"></div>
-            <p>Completing verification...</p>
+            <p>Processing...</p>
         </div>
 
+        <div class="success status">Operation completed successfully!</div>
+        <div class="error status">An error occurred. Please try again.</div>
     </div>
 
     <!-- Firebase SDK -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, applyActionCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Your web app's Firebase configuration
+        // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyC6KUSkm3AY6NOoGnhqXgWusyc5muy5uZc",
             authDomain: "bookit-test-8f64e.firebaseapp.com",
@@ -192,49 +206,55 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Get verification code from URL
+        // Get URL parameters
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
+        const mode = urlParams.get('mode');
         const actionCode = urlParams.get('oobCode');
 
         // Show loading state
         document.querySelector('.loading').style.display = 'block';
 
-        // Handle the verification code
+        // Handle different modes
         if (actionCode) {
-            applyActionCode(auth, actionCode)
-                .then(() => {
-                    // Email verified successfully
-                    document.querySelector('.loading').style.display = 'none';
-                    document.querySelector('.success').style.display = 'block';
-                })
-                .catch((error) => {
-                    // Error occurred
-                    document.querySelector('.loading').style.display = 'none';
-                    document.querySelector('.error').style.display = 'block';
-                    console.error('Verification error:', error);
-                });
+            if (mode === 'resetPassword') {
+                // Show password reset UI
+                document.getElementById('emailVerification').style.display = 'none';
+                document.getElementById('passwordReset').style.display = 'block';
+                document.querySelector('.loading').style.display = 'none';
+
+                // Add password reset handler to window object
+                window.confirmPasswordReset = async () => {
+                    try {
+                        const newPassword = document.getElementById('newPassword').value;
+                        await confirmPasswordReset(auth, actionCode, newPassword);
+                        document.querySelector('.success').textContent = 'Password reset successful!';
+                        document.querySelector('.success').style.display = 'block';
+                        document.getElementById('passwordReset').style.display = 'none';
+                    } catch (error) {
+                        document.querySelector('.error').textContent = 'Error resetting password: ' + error.message;
+                        document.querySelector('.error').style.display = 'block';
+                        console.error('Password reset error:', error);
+                    }
+                };
+            } else {
+                // Handle email verification
+                applyActionCode(auth, actionCode)
+                    .then(() => {
+                        document.querySelector('.loading').style.display = 'none';
+                        document.querySelector('.success').style.display = 'block';
+                    })
+                    .catch((error) => {
+                        document.querySelector('.loading').style.display = 'none';
+                        document.querySelector('.error').style.display = 'block';
+                        console.error('Verification error:', error);
+                    });
+            }
         } else {
-            // No verification code provided
+            // No action code provided
             document.querySelector('.loading').style.display = 'none';
             document.querySelector('.error').style.display = 'block';
         }
-
-        // Function to resend verification email
-        window.resendVerification = async () => {
-            try {
-                const user = auth.currentUser;
-                if (user) {
-                    await user.sendEmailVerification();
-                    alert('Verification email sent! Please check your inbox.');
-                } else {
-                    alert('Please sign in to resend verification email.');
-                }
-            } catch (error) {
-                alert('Error sending verification email. Please try again.');
-                console.error('Resend error:', error);
-            }
-        };
     </script>
 </body>
 
