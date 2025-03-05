@@ -6,17 +6,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Servio App</title>
     <meta http-equiv="refresh" content="0;url=https://apps.apple.com/ca/app/servio/id6738021144" id="meta-refresh">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .button {
+            background-color: white;
+            color: #1e3c72;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-message {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
     <script>
         // Detect device and redirect accordingly
         if (/Android/i.test(navigator.userAgent)) {
-            document.getElementById('meta-refresh').content = "0;url=https://play.google.com/store/apps/details?id=com.findIT.service_marketplace&hl=en_CA";
+            document.getElementById('meta-refresh').content = "0;url=https://play.google.com/store/apps/details?id=com.servio.app";
         }
     </script>
 </head>
 
 <body>
-    <div style="text-align: center; padding: 20px;">
-        Redirecting to app store...
+    <div class="container">
+        <img src="/path-to-your-logo.png" alt="Servio Logo" class="logo">
+        <h1>Download Servio</h1>
+        <p>Get instant access to trusted local services in Airdrie & Calgary</p>
+
+        <div class="download-buttons">
+            <a href="https://apps.apple.com/ca/app/servio/id6738021144" class="button">
+                Download for iPhone
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.servio.app" class="button">
+                Download for Android
+            </a>
+        </div>
+
+        <div class="error-message">
+            If you're having trouble downloading, please try opening this page directly on your mobile device.
+            <br><br>
+            Need help? Contact us at support@theservio.com
+        </div>
     </div>
 </body>
 
