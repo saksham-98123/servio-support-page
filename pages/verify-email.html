@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Your Email - Servio</title>
+    <title>Account Management - Servio</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
@@ -14,6 +14,8 @@
             --background: #f5f5f5;
             --text: #333333;
             --white: #FFFFFF;
+            --error: #dc3545;
+            --success: #198754;
         }
 
         * {
@@ -35,80 +37,128 @@
         .verification-container {
             background: var(--white);
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            object-fit: contain;
         }
 
         h1 {
             color: var(--primary);
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 16px;
+            font-weight: 700;
         }
 
         p {
             color: var(--text);
             margin-bottom: 24px;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-size: 16px;
         }
 
-        .status {
-            margin: 20px 0;
-            padding: 15px;
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            display: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .success {
-            background: #e7f5e7;
-            color: #0f5132;
-            display: none;
-        }
-
-        .error {
-            background: #fee7e7;
-            color: #842029;
-            display: none;
+        .input-field:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
         }
 
         .button {
             background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
+            padding: 14px 28px;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            width: 100%;
         }
 
         .button:hover {
             background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 128, 128, 0.15);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 16px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success {
+            background: rgba(25, 135, 84, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(25, 135, 84, 0.2);
+        }
+
+        .error {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(220, 53, 69, 0.2);
         }
 
         .loading {
             display: none;
-            margin: 20px 0;
+            margin: 24px 0;
         }
 
         .spinner {
-            border: 3px solid #f3f3f3;
+            border: 3px solid rgba(0, 128, 128, 0.1);
             border-top: 3px solid var(--primary);
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
+            margin: 0 auto 12px;
+        }
+
+        .loading p {
+            color: var(--primary);
+            font-weight: 500;
+            margin: 0;
         }
 
         @keyframes spin {
@@ -121,41 +171,78 @@
             }
         }
 
-        .action-buttons {
-            margin-top: 20px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .download-text {
-            margin-bottom: 10px;
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
         }
 
-        .store-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        .back-to-app {
+            margin-top: 24px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
         }
 
-        .store-button {
-            width: 120px;
-            height: 40px;
-            border-radius: 6px;
-            overflow: hidden;
+        .back-to-app:hover {
+            color: var(--primary);
+        }
+
+        .password-requirements {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .requirement {
+            margin: 4px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
+            gap: 8px;
+            color: #666;
         }
 
-        .store-button:hover {
-            transform: scale(1.05);
+        .requirement i {
+            font-size: 8px;
         }
 
-        .store-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .requirement.valid {
+            color: var(--success);
+        }
+
+        .requirement.valid i {
+            color: var(--success);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-field.error {
+            border-color: var(--error);
+        }
+
+        .passwords-match {
+            color: var(--success);
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -164,26 +251,68 @@
 
         <!-- Email Verification Content -->
         <div id="emailVerification">
-            <h1>Email Verified!</h1>
-            <p>Your email has been successfully verified. You can now sign in to start using Servio.</p>
+            <i class="fas fa-envelope-open-text icon"></i>
+            <h1>Email Verification</h1>
+            <p>We're verifying your email address. This will only take a moment.</p>
         </div>
 
         <!-- Password Reset Content -->
         <div id="passwordReset" style="display: none;">
-            <h1>Reset Password</h1>
-            <p>Enter your new password below:</p>
-            <input type="password" id="newPassword" placeholder="New Password"
-                style="padding: 10px; margin: 10px 0; width: 100%; border-radius: 6px; border: 1px solid #ddd;">
-            <button class="button" onclick="confirmPasswordReset()">Reset Password</button>
+            <i class="fas fa-lock icon"></i>
+            <h1>Reset Your Password</h1>
+            <p>Please enter your new password below. Make sure it's secure and unique.</p>
+
+            <div class="input-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" class="input-field" placeholder="Enter your new password"
+                    minlength="6">
+                <div class="password-requirements">
+                    <p class="requirement" id="lengthReq">
+                        <i class="fas fa-circle"></i> At least 6 characters
+                    </p>
+                    <p class="requirement" id="upperReq">
+                        <i class="fas fa-circle"></i> One uppercase letter
+                    </p>
+                    <p class="requirement" id="lowerReq">
+                        <i class="fas fa-circle"></i> One lowercase letter
+                    </p>
+                    <p class="requirement" id="numberReq">
+                        <i class="fas fa-circle"></i> One number
+                    </p>
+                    <p class="requirement" id="specialReq">
+                        <i class="fas fa-circle"></i> One special character
+                    </p>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="input-field" placeholder="Confirm your new password">
+            </div>
+
+            <button class="button" onclick="confirmPasswordReset()">
+                <i class="fas fa-check"></i> Reset Password
+            </button>
         </div>
 
         <div class="loading">
             <div class="spinner"></div>
-            <p>Processing...</p>
+            <p>Processing your request...</p>
         </div>
 
-        <div class="success status">Operation completed successfully!</div>
-        <div class="error status">An error occurred. Please try again.</div>
+        <div class="success status">
+            <i class="fas fa-check-circle"></i>
+            <span class="status-message">Operation completed successfully!</span>
+        </div>
+
+        <div class="error status">
+            <i class="fas fa-exclamation-circle"></i>
+            <span class="status-message">An error occurred. Please try again.</span>
+        </div>
+
+        <a href="servio://app" class="back-to-app">
+            <i class="fas fa-arrow-left"></i> Return to Servio App
+        </a>
     </div>
 
     <!-- Firebase SDK -->
@@ -191,7 +320,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, applyActionCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyC6KUSkm3AY6NOoGnhqXgWusyc5muy5uZc",
             authDomain: "bookit-test-8f64e.firebaseapp.com",
@@ -202,59 +330,135 @@
             measurementId: "G-F3DKJD8DQT"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Get URL parameters
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const mode = urlParams.get('mode');
         const actionCode = urlParams.get('oobCode');
 
-        // Show loading state
         document.querySelector('.loading').style.display = 'block';
 
-        // Handle different modes
         if (actionCode) {
             if (mode === 'resetPassword') {
-                // Show password reset UI
                 document.getElementById('emailVerification').style.display = 'none';
                 document.getElementById('passwordReset').style.display = 'block';
                 document.querySelector('.loading').style.display = 'none';
 
-                // Add password reset handler to window object
                 window.confirmPasswordReset = async () => {
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+
+                    if (!validatePassword(newPassword)) {
+                        showError('Please meet all password requirements');
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        showError('Passwords do not match');
+                        return;
+                    }
+
+                    document.querySelector('.loading').style.display = 'block';
+
                     try {
-                        const newPassword = document.getElementById('newPassword').value;
                         await confirmPasswordReset(auth, actionCode, newPassword);
-                        document.querySelector('.success').textContent = 'Password reset successful!';
-                        document.querySelector('.success').style.display = 'block';
                         document.getElementById('passwordReset').style.display = 'none';
+                        showSuccess('Password reset successful! You can now sign in with your new password.');
                     } catch (error) {
-                        document.querySelector('.error').textContent = 'Error resetting password: ' + error.message;
-                        document.querySelector('.error').style.display = 'block';
+                        showError('Error resetting password: ' + error.message);
                         console.error('Password reset error:', error);
+                    } finally {
+                        document.querySelector('.loading').style.display = 'none';
                     }
                 };
             } else {
-                // Handle email verification
                 applyActionCode(auth, actionCode)
                     .then(() => {
-                        document.querySelector('.loading').style.display = 'none';
-                        document.querySelector('.success').style.display = 'block';
+                        showSuccess('Email verified successfully! You can now use all features of the app.');
                     })
                     .catch((error) => {
-                        document.querySelector('.loading').style.display = 'none';
-                        document.querySelector('.error').style.display = 'block';
+                        showError('Verification error: ' + error.message);
                         console.error('Verification error:', error);
+                    })
+                    .finally(() => {
+                        document.querySelector('.loading').style.display = 'none';
                     });
             }
         } else {
-            // No action code provided
+            showError('No verification code provided');
             document.querySelector('.loading').style.display = 'none';
-            document.querySelector('.error').style.display = 'block';
         }
+
+        function showSuccess(message) {
+            const successEl = document.querySelector('.success');
+            successEl.querySelector('.status-message').textContent = message;
+            successEl.style.display = 'block';
+            document.querySelector('.error').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorEl = document.querySelector('.error');
+            errorEl.querySelector('.status-message').textContent = message;
+            errorEl.style.display = 'block';
+            document.querySelector('.success').style.display = 'none';
+        }
+
+        function validatePassword(password) {
+            const requirements = {
+                length: password.length >= 6,
+                upper: /[A-Z]/.test(password),
+                lower: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+            };
+
+            updateRequirementUI('lengthReq', requirements.length);
+            updateRequirementUI('upperReq', requirements.upper);
+            updateRequirementUI('lowerReq', requirements.lower);
+            updateRequirementUI('numberReq', requirements.number);
+            updateRequirementUI('specialReq', requirements.special);
+
+            return Object.values(requirements).every(req => req);
+        }
+
+        function updateRequirementUI(elementId, isValid) {
+            const element = document.getElementById(elementId);
+            if (isValid) {
+                element.classList.add('valid');
+                element.querySelector('i').classList.remove('fa-circle');
+                element.querySelector('i').classList.add('fa-check-circle');
+            } else {
+                element.classList.remove('valid');
+                element.querySelector('i').classList.remove('fa-check-circle');
+                element.querySelector('i').classList.add('fa-circle');
+            }
+        }
+
+        // Add real-time password validation
+        document.getElementById('newPassword').addEventListener('input', function () {
+            validatePassword(this.value);
+        });
+
+        // Add password confirmation check
+        document.getElementById('confirmPassword').addEventListener('input', function () {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = this.value;
+
+            if (confirmPassword === '') {
+                this.classList.remove('error');
+                return;
+            }
+
+            if (newPassword === confirmPassword) {
+                this.classList.remove('error');
+                showSuccess('Passwords match!');
+            } else {
+                this.classList.add('error');
+                showError('Passwords do not match');
+            }
+        });
     </script>
 </body>
 
