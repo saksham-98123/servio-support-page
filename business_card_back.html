@@ -107,6 +107,24 @@
             border-radius: 0;
         }
 
+        .save-button {
+            position: fixed;
+            bottom: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .save-button:hover {
+            background: var(--primary-dark);
+        }
+
         @media print {
             body {
                 background: none;
@@ -120,6 +138,10 @@
 
             .card-back {
                 box-shadow: none;
+            }
+
+            .save-button {
+                display: none;
             }
         }
     </style>
@@ -144,6 +166,10 @@
         </div>
     </div>
 
+    <button class="save-button" onclick="saveAsPNG()">Save as PNG</button>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
     <script>
         new QRCode(document.getElementById("qrcode"), {
             text: "https://instagram.com/servio_ca",  // Replace with your Instagram URL
@@ -153,6 +179,18 @@
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
         });
+
+        function saveAsPNG() {
+            html2canvas(document.querySelector('.card-back'), {
+                scale: 2, // Higher resolution
+                backgroundColor: null,
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'servio-business-card-back.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
     </script>
 </body>
 

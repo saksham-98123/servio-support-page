@@ -191,6 +191,31 @@
                 margin: 0;
             }
         }
+
+        /* Add these new styles */
+        .save-button {
+            position: fixed;
+            bottom: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .save-button:hover {
+            background: var(--primary-dark);
+        }
+
+        @media print {
+            .save-button {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -221,9 +246,15 @@
         </div>
     </div>
 
+    <!-- Add this button -->
+    <button class="save-button" onclick="saveAsPNG()">Save as PNG</button>
+
+    <!-- Add html2canvas library before your existing script -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
     <script>
         // Generate QR Code
-        new QRCode(document.getElementById("qrcode"), {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: "https://theservio.com/pages/download.html",
             width: 70,
             height: 70,
@@ -231,6 +262,66 @@
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
         });
+
+        // Add logo overlay after QR code is generated
+        setTimeout(() => {
+            const qrCanvas = document.querySelector('#qrcode canvas');
+            const ctx = qrCanvas.getContext('2d');
+            const logo = new Image();
+            logo.src = "../assets/images/appIcon.png";
+
+            logo.onload = function () {
+                // Calculate dimensions
+                const size = qrCanvas.width;
+                const logoSize = size * 0.3;
+
+                // Create temporary canvas for color manipulation
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = logoSize;
+                tempCanvas.height = logoSize;
+                const tempCtx = tempCanvas.getContext('2d');
+
+                // Draw logo on temporary canvas
+                tempCtx.drawImage(logo, 0, 0, logoSize, logoSize);
+
+                // Apply black color filter
+                tempCtx.globalCompositeOperation = 'source-in';
+                tempCtx.fillStyle = '#000000';
+                tempCtx.fillRect(0, 0, logoSize, logoSize);
+
+                // Create white background in main canvas
+                ctx.fillStyle = '#ffffff';
+                const padding = 4;
+                ctx.fillRect(
+                    (size - logoSize - padding) / 2,
+                    (size - logoSize - padding) / 2,
+                    logoSize + padding,
+                    logoSize + padding
+                );
+
+                // Draw the black logo onto main canvas
+                ctx.drawImage(
+                    tempCanvas,
+                    (size - logoSize) / 2,
+                    (size - logoSize) / 2,
+                    logoSize,
+                    logoSize
+                );
+            };
+        }, 1000);
+
+        // Add this new function
+        function saveAsPNG() {
+            html2canvas(document.querySelector('.card-container'), {
+                scale: 2, // Higher resolution
+                backgroundColor: null,
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'servio-business-card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
     </script>
 </body>
 
